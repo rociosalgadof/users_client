@@ -4,23 +4,6 @@ import SliderWrapper from "./SliderWrapper";
 import getViews from "../../utils/getViews";
 
 export default function Slider(props){
-const elements = props.displayedUsers.map((element)=>{return <Card element={element} key={element.id} class={"card card-slider"}/>})
-let first;
-let second;
-if(elements.length<=4){
-    let num = 4
-    if(elements.length<4){
-        num = elements.length
-    }
-    first = elements.slice(0, num);
-}else{
-    first = elements.slice(0, 4);
-    let num = 8
-    if(elements.length<8){
-        num = elements.length
-    }
-    second=elements.slice(4, num);
-}
 return(
     <div id="carouselExampleControls" className="carousel slide carousel--slider" data-bs-ride="carousel">
     <div className="carousel-inner">
