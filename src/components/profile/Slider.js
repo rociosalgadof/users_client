@@ -1,5 +1,7 @@
 import React from "react";
 import Card from "../home/Card"
+import SliderWrapper from "./SliderWrapper";
+import getViews from "../../utils/getViews";
 
 export default function Slider(props){
 const elements = props.displayedUsers.map((element)=>{return <Card element={element} key={element.id} class={"card card-slider"}/>})
@@ -22,17 +24,8 @@ if(elements.length<=4){
 return(
     <div id="carouselExampleControls" className="carousel slide carousel--slider" data-bs-ride="carousel">
     <div className="carousel-inner">
-      <div className="carousel-item active">
-        <div class="cards-wrapper">
-        {first && first}
-  </div>
-      </div>
-      <div className="carousel-item">
-        <div class="cards-wrapper">
-        {second && second}
-  </div>
-      </div>
-    </div>
+      <SliderWrapper arr={getViews(props.displayedUsers)}/>
+    </div> 
     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
       <span className="carousel-control-prev-icon" aria-hidden="true"></span>
       <span className="visually-hidden">Previous</span>
