@@ -20,6 +20,7 @@ export default function Main(){
   const [ search, setSearch ] = useState("")
   const [pages, setPages] = useState({})
   const [usersPerPage, setUsersPerPage] = useState([])
+  const [cleaner, setCleaner] = useState(false)
 
 useEffect(() => {
     if(state.length){
@@ -51,6 +52,8 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(search.length){
+    setCleaner(true)
+    setFilterObject(function(oldValue){return Object.assign(...Object.keys(oldValue).map(k => ({ [k]: false })));})
     setUsersPerPage(function(oldValue){
       let str = search.toLocaleLowerCase()
       const results = state.filter((element)=> element.first_name.toLowerCase().includes(str) || 
@@ -58,6 +61,9 @@ useEffect(()=>{
       element.username.toLowerCase().includes(str))
     return results
    })
+  }else if(cleaner && !search.length){
+    handdleClick()
+    setCleaner(false)
   }
 },[search])
 
@@ -72,7 +78,8 @@ useEffect(()=>{
   if(!isObjEmpty(pages)){
   setUsersPerPage(function(oldValue){
   let result = getPage(displayedUsers, checkTrue(pages))
-  return result})}
+  return result})
+  console.log("pages updated")}
 },[pages])
 
 
@@ -88,7 +95,6 @@ function handdleClick(){
       )
 })
 }
-
     return (
         <main>
         <section>

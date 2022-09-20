@@ -20,7 +20,7 @@ const dispatch = useDispatch();
   return (
       <Routes>
         <Route path="/" element={<Feed />} />
-        <Route exact path="/:userId" element={<Profile/>} />
+        <Route path="/:userId" element={<Profile/>} />
       </Routes>
   );
 }
