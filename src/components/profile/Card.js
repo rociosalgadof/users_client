@@ -11,17 +11,17 @@ export default function ProfileCard(){
     const { userId } = useParams();
     const [user, setUser] = useState(0)
     const [displayedUsers, setDisplayedUsers] = useState([])
+
     useEffect(()=>{
         setUser(state.find((element)=> element.id === parseInt(userId)))
-  
-    },[])
+    },[userId])
 
     useEffect(()=>{
         if(user){
             setDisplayedUsers(state.filter((element)=> element.employment.key_skill === user.employment.key_skill))
         }
     },[user])
-  
+
     return(
         <>
             <div className="container-profile">
