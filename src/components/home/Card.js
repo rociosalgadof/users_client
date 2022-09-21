@@ -4,6 +4,10 @@ import { useDispatch} from "react-redux";
 import { deleteUser } from "../../actions/users";
 
 export default function Card(props){
+    const dispatch = useDispatch();
+    function handleClick(id){
+        dispatch(deleteUser(id));
+    }
     return (
         <article className={props.class}>
             <img src={props.element.avatar} alt="" className="card-image"/>
@@ -12,6 +16,7 @@ export default function Card(props){
                 <p className="card-p">{props.element.username}</p>
                 <Link to={`/${props.element.id}`}><button className="card-button">Más Info</button></Link>
             </div>
+            <div className="delete-btn" onClick={() => handleClick(props.element._id)}>Eliminar</div>
         </article>
     )
 }

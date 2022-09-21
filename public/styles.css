@@ -446,6 +446,19 @@ margin-bottom: 40px;
 text-transform: capitalize;
 }
 
+.delete-btn{
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover{
+  color:hsl(257, 7%, 63%)
+}
+
+#logo-link{
+  text-decoration: none;
+}
+
 /* *******************************************Responsive***************************************************** */
 
 @media (max-width:768px){
@@ -533,16 +546,10 @@ text-transform: capitalize;
   display: flex;
   justify-content: center;
 }
-/* .card-slider img {
-  max-width: 100%;
-  max-height: 100%;
-} */
 
 .card-slider {
   margin: 0 2em;
-  /* box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-  border: none;
-  border-radius: 0; */
+
 }
 .carousel-inner {
   padding: 1em;

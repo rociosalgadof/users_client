@@ -18,9 +18,11 @@ export default function ProfileCard(){
 
     useEffect(()=>{
         if(user){
-            setDisplayedUsers(state.filter((element)=> element.employment.key_skill === user.employment.key_skill))
+            setDisplayedUsers(state.filter((element)=> element.employment.key_skill === user.employment.key_skill && user.id !== element.id))
         }
     },[user])
+
+    console.log(user)
 
     return(
         <>
