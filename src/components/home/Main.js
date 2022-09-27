@@ -11,9 +11,11 @@ import isObjEmpty from "../../utils/isObjEmpty"
 import createPagesObj from "../../utils/pagesObj";
 import PageNum from "./PageNum";
 import getPage from "../../utils/slidingWindow";
+import SkeletonCard from "./SkeletonCard";
 
 export default function Main(){
   const state = useSelector((state) => state.users);
+  const defaultArray = [0,1,2,3,4,5,6,7]
   const [displayedUsers, setDisplayedUsers] = useState([])
   const [genders, setGenders] = useState([])
   const [filterObject, setFilterObject] = useState({})
@@ -121,7 +123,7 @@ function handdleClick(){
             })}
           </div>
         <main className="grid">
-          {usersPerPage.length && usersPerPage.map((element)=>{return <Card element={element} key={element.id} class={"card"}/>})}
+          {usersPerPage.length ? usersPerPage.map((element)=>{return <Card element={element} key={element.id} class={"card"}/>}) : defaultArray.map((element)=>{return <SkeletonCard/>})}
         </main>
         <div className="page-num-container">
           {!isObjEmpty(pages) && Object.keys(pages).map((element)=>{return <PageNum num={element} pages={pages} setPages={setPages}/>})}

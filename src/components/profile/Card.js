@@ -22,8 +22,6 @@ export default function ProfileCard(){
         }
     },[user])
 
-    console.log(user)
-
     return(
         <>
             <div className="container-profile">
