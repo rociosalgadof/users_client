@@ -101,7 +101,7 @@ function handdleClick(){
         <main>
         <section>
           <div className="content">
-            <h1>Buscador de usuarios</h1>
+            <h1>Buscador de usuarios*</h1>
             <p>Busca según nombre, username o filtra según el género del usuario.</p>
           </div>
           <div className="image">
