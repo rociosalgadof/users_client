@@ -1,21 +1,23 @@
 import * as api from "../api/index";
 
-export const getUsers = () => async (dispatch) => {
+export const getCandidates = () => async (dispatch) => {
   try {
-    const { data } = await api.getUsers();
+    const { data } = await api.getCandidates();
     dispatch({ type: "FETCH_ALL", payload: data });
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const deleteUser = (id) => async (dispatch) => {
+export const deleteCandidate = (id) => async (dispatch) => {
   try {
-    await api.deleteUser(id);
+    await api.deleteCandidate(id);
 
     dispatch({ type: "DELETE", payload: id });
   } catch (error) {
     console.log(error.message);
   }
 };
+
+
 

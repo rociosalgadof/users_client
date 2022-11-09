@@ -7,7 +7,7 @@ import Slider from "./Slider";
 
 
 export default function ProfileCard(){
-    const state = useSelector((state) => state.users);
+    const state = useSelector((state) => state.candidates);
     const { userId } = useParams();
     const [user, setUser] = useState(0)
     const [displayedUsers, setDisplayedUsers] = useState([])
@@ -20,7 +20,7 @@ export default function ProfileCard(){
         if(user){
             setDisplayedUsers(state.filter((element)=> element.employment.key_skill === user.employment.key_skill && user.id !== element.id))
         }
-    },[user])
+    },[user, state])
 
     return(
         <>

@@ -1,12 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { deleteUser } from "../../actions/users";
+import { useDispatch, useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { deleteCandidate } from "../../actions/candidates";
 
 export default function Card(props){
+    const global = useSelector((state) => state);
     const dispatch = useDispatch();
+    const [isLogged, setIsLogged] = useState(false)
+    
+    useEffect(()=>{
+        setIsLogged(global.user.isLogged)
+    }, [global])
+
     function handleClick(id){
-        dispatch(deleteUser(id));
+        dispatch(deleteCandidate(id));
     }
     return (
         <article className={props.class}>
@@ -16,7 +24,7 @@ export default function Card(props){
                 <p className="card-p">{props.element.username}</p>
                 <Link to={`/${props.element.id}`}><button className="card-button">Más Info</button></Link>
             </div>
-            <div className="delete-btn" onClick={() => handleClick(props.element._id)}>Eliminar</div>
+            <div className="delete-btn" style={{display: !isLogged && "none"}} onClick={() => handleClick(props.element._id)}>Eliminar</div>
         </article>
     )
 }

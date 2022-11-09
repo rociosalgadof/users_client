@@ -11,11 +11,13 @@ import isObjEmpty from "../../utils/isObjEmpty"
 import createPagesObj from "../../utils/pagesObj";
 import PageNum from "./PageNum";
 import getPage from "../../utils/slidingWindow";
-import SkeletonCard from "./SkeletonCard";
+import Cards from "../skeletons/Cards"
+import Genders from "../skeletons/Genders"
+import Pages from "../skeletons/Pages"
 
 export default function Main(){
-  const state = useSelector((state) => state.users);
-  const defaultArray = [0,1,2,3,4,5,6,7]
+  const global = useSelector((state) => state);
+  const state = useSelector((state) => state.candidates);
   const [displayedUsers, setDisplayedUsers] = useState([])
   const [genders, setGenders] = useState([])
   const [filterObject, setFilterObject] = useState({})
@@ -23,13 +25,15 @@ export default function Main(){
   const [pages, setPages] = useState({})
   const [usersPerPage, setUsersPerPage] = useState([])
   const [cleaner, setCleaner] = useState(false)
+  const [loadingElements, setLoadingElements] = useState({genders:<Genders/>,cards:<Cards/>,pages:<Pages/>})
+  const [loading, setLoading] = useState(true)
 
 useEffect(() => {
     if(state.length){
         setGenders(getGenders(state))
         console.log("State updated")
     }
-}, [state]);
+}, [state, global]);
 
 useEffect(function(){
   if(genders.length){
@@ -84,6 +88,13 @@ useEffect(()=>{
   console.log("pages updated")}
 },[pages])
 
+useEffect(()=>{
+  const timeOutLoading = setTimeout(()=> setLoading(false), 3000)
+  return ()=>{
+    clearTimeout(timeOutLoading)
+  }
+},[loading])
+
 
 const searcher = (e) => {
   setSearch(e.target.value)  
@@ -97,11 +108,12 @@ function handdleClick(){
       )
 })
 }
-    return (
+console.log(global)
+return (
         <main>
         <section>
           <div className="content">
-            <h1>Buscador de usuarios*</h1>
+            <h1>Buscador de usuarios</h1>
             <p>Busca según nombre, username o filtra según el género del usuario.</p>
           </div>
           <div className="image">
@@ -117,16 +129,16 @@ function handdleClick(){
         <p className="resultados" style={{display: search.length ? 'block' : 'none'}}>Resultados para <span>{search}</span></p>
         <section className="services">
           <div className="service-content">
-            <span className={filterObject.todos ? "genero active-gender" : "genero"} onClick={handdleClick}>Todos</span>
-            {genders.length && genders.map(function(element){
-              return <Gender text={element} key={element} filterObject={filterObject} setFilterObject={setFilterObject}/>
-            })}
+            <span className={filterObject.todos ? "genero active-gender" : "genero"} style={{display: loading && 'none'}} onClick={handdleClick}>Todos</span>
+      {!loading && genders.length ? genders.map(function(element){
+        return <Gender text={element} key={element} filterObject={filterObject} setFilterObject={setFilterObject}/>
+      }): loadingElements.genders}
           </div>
         <main className="grid">
-          {usersPerPage.length ? usersPerPage.map((element)=>{return <Card element={element} key={element.id} class={"card"}/>}) : defaultArray.map((element)=>{return <SkeletonCard/>})}
+          {!loading && usersPerPage.length ? usersPerPage.map((element)=>{return <Card element={element} key={element.id} class={"card--candidate"}/>}) : loadingElements.cards}
         </main>
         <div className="page-num-container">
-          {!isObjEmpty(pages) && Object.keys(pages).map((element)=>{return <PageNum num={element} pages={pages} setPages={setPages}/>})}
+          {!loading && !isObjEmpty(pages) ? Object.keys(pages).map((element)=>{return <PageNum num={element} pages={pages} setPages={setPages}/>}):loadingElements.pages}
         </div>
         </section>
         <section className="boost">

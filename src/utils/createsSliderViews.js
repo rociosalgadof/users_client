@@ -6,7 +6,7 @@ let array = []
 for(var i = 0; i < arr.length; i++){
     let arr1 = []
     for(var j = 0; j < arr[i].length; j++){
-        arr1.push(<Card element={arr[i][j]} key={arr[i][j].id} class={"card card-slider"}/>)
+        arr1.push(<Card element={arr[i][j]} key={arr[i][j].id} class={"card--candidate card-slider"}/>)
     }
     array.push(arr1)
 }

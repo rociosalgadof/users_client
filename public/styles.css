@@ -14,7 +14,7 @@ body {
 header {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin: 1.2rem;
   margin-bottom: 3rem;
 }
@@ -221,7 +221,7 @@ ul :nth-child(1) {
   gap: 30px;
 }
 
-.card{
+.card--candidate{
   background-color: #eff1f7;
   border: none;
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
@@ -231,7 +231,7 @@ ul :nth-child(1) {
   transition: transform .3s;
 }
 
-.card:hover{
+.card--candidate:hover{
   transform: translateY(5px);
   box-shadow: 2px 2px 26px 0px rgba(0, 0, 0, 0.3);;
 }
@@ -582,10 +582,10 @@ text-transform: capitalize;
 .card__skeleton{
   background-color: #fff;
   height: auto;
-  width: 200px;
+  width: 250px;
   overflow: hidden;
   margin: 12px;
-  border-radius: 5px;
+  border-radius: .9rem;
   box-shadow: 9px 17px 45px -29px
               rgba(0, 0, 0, 0.44);
 }
@@ -596,9 +596,15 @@ text-transform: capitalize;
   height: 100%;
 }
 
+.skeleton__container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
 .card__image.loading {
-  height: 300px;
-  width: 400px;
+  height: 250px;
 }
 
 /* Card title */
@@ -609,7 +615,7 @@ text-transform: capitalize;
 }
 
 .card__title.loading {
-  height: 1rem;
+  height: 1.5rem;
   width: 50%;
   margin: 1rem;
   border-radius: 3px;
@@ -617,6 +623,7 @@ text-transform: capitalize;
 
 /* Card description */
 .card__description {
+  width: 11rem;
   padding: 8px;
   font-size: 16px;
 }
@@ -658,4 +665,68 @@ text-transform: capitalize;
   100% {
       transform: translateX(100%);
   }
+}
+
+#genero__loading{
+  position: relative;
+  background-color: #e2e2e2;
+  width: 100px;
+  height: 40px;
+}
+
+.pages__loading{
+  width: 1.5rem;
+  height: 2rem;
+  background-color: #e2e2e2;
+}
+
+#link-auth{
+  text-decoration: none;
+  color:hsl(255, 11%, 22%);
+  padding-right: 15px;
+  padding-left: 15px;
+  height: 52px;
+  display: flex;
+  align-items: center;}
+
+#link-auth:hover{
+  background-color: #e0e1dd;
+}
+
+#username, #password{
+  width: 90%;
+}
+
+.auth-titles{
+  text-align: center;
+}
+
+#list--item{
+  display: none;
+}
+.password--title{
+  color: hsl(257, 7%, 63%);
+  font-size: 18px;
+}
+.password--list{
+  font-size: 18px;
+}
+
+.user-exists{
+  color: red;
+  font-weight: bold;
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.item--check{
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+  color: hsl(257, 7%, 63%);
+}
+
+.checked{
+  color: green
 }
